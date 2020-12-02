@@ -1,24 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import LocalCredentialsBanner from "./services/helpers/LocalCredentialsBanner";
+import MockDataWarning from "./services/helpers/MockDataWarning";
+import Search from "./search/Search";
+import { kendra, indexId, errors, s3 } from "./services/Kendra";
+import { facetConfiguration } from "./search/configuration";
+
+import "./App.css";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {errors.length > 0 ? (
+        <MockDataWarning errors={errors} />
+      ) : (
+        <LocalCredentialsBanner />
+      )}
+
+      <Search
+        kendra={kendra}
+        s3={s3}
+        indexId={indexId}
+        facetConfiguration={facetConfiguration}
+      />
     </div>
   );
 }
