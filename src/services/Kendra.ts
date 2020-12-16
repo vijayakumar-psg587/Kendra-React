@@ -47,17 +47,9 @@ export const errors = _loadingErrors;
 export const indexId = config ? config.indexId : undefined;
 
 export const kendra = !hasErrors
-  ? new Kendra({
-      accessKeyId: config.accessKeyId,
-      secretAccessKey: config.secretAccessKey,
-      region: config.region,
-    })
+  ? new Kendra()
   : undefined;
 
 export const s3 = !hasErrors
-  ? new S3({
-      accessKeyId: config.accessKeyId,
-      secretAccessKey: config.secretAccessKey,
-      region: config.region,
-    })
+  ? new S3()
   : undefined;
